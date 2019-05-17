@@ -309,9 +309,11 @@ for set_split in splits:
     if set_split == 'train':
         data[set_split]['images'] = convert_list_to_array(train_patches)
         data[set_split]['labels'] = convert_list_to_array(train_labels)
+        mean_value = np.mean(np.mean(data[set_split]['images']))
 
         np.save(saving_path + 'train_images.npy', data[set_split]['images'])
         np.save(saving_path + 'train_labels.npy', data[set_split]['labels'])
+        np.save(saving_path + 'mean_value.npy', mean_value)
         print('Saved train-patches')
 
     else:

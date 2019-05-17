@@ -227,19 +227,8 @@ for set_split in splits.keys():
     if set_split == 'train':
         np.save(saving_path+'train_images.npy', data[set_split]['images'])
         np.save(saving_path+'train_labels.npy', data[set_split]['labels'])
-
-        mean_img = np.zeros(shape=(28, 28, chs), dtype=mitotic_patches.dtype)
-        mean_value = 0.0
-        for k in range(0, data[set_split]['images'].shape[0]):
-            img = data[set_split]['images'][k, ...].reshape((28, 28, chs))
-            mean_img += img
-
-        mean_img /= data[set_split]['images'].shape[0]
-        mean_value = np.mean(mean_img)
-
-        np.save(saving_path+'mean_img.npy', mean_img)
+        mean_value = np.mean(np.mean(data[set_split]['images']))
         np.save(saving_path+'mean_value.npy', mean_value)
-
         print('Saved train-patches')
 
     elif set_split == 'val':
