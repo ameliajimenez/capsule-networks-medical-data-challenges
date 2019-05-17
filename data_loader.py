@@ -169,23 +169,21 @@ class DataSet(object):
                                                  labels.shape))
       self._num_examples = images.shape[0]
 
-      # Convert shape from [num examples, rows, columns, depth]
-      # to [num examples, rows*columns] (assuming depth == 1)
-      if reshape:
-          assert images.shape[3] == 1
-          images = images.reshape(images.shape[0],
+    # Convert shape from [num examples, rows, columns, depth]
+    # to [num examples, rows*columns] (assuming depth == 1)
+    if reshape:
+        assert images.shape[3] == 1
+        images = images.reshape(images.shape[0],
                                   images.shape[1] * images.shape[2])
 
-      # Convert from [0, 255] -> [0.0, 1.0].
-      images = images.astype(np.float32)
-      images = np.multiply(images, 1.0 / 255.0)
+    # Convert from [0, 255] -> [0.0, 1.0].
+    images = images.astype(np.float32)
+    images = np.multiply(images, 1.0 / 255.0)
 
     self._images = images
     self._labels = labels
     self._epochs_completed = 0
     self._index_in_epoch = 0
-    self._counter = np.zeros(self._num_examples)
-    self._subset_size = int(0.25 * self._num_examples)
 
   @property
   def images(self):
@@ -302,7 +300,7 @@ def read_data_sets(data_path, fake_data=False, one_hot=False,
     val_labels = val_labels[perm]
 
     # For experiments with data-augmentation
-    if augment is True:
+    if augment:
         if 'fashion' in data_path:  # rotations +-10 and horizontal flips
             augmented_images, augmented_labels = augment_data(train_images, train_labels, hflip=True)
         elif 'mnist' in data_path:  # rotations +-10
