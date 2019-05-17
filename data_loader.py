@@ -174,8 +174,7 @@ class DataSet(object):
     # to [num examples, rows*columns] (assuming depth == 1)
     if reshape:
         assert images.shape[3] == 1
-        images = images.reshape(images.shape[0],
-                                  images.shape[1] * images.shape[2])
+        images = images.reshape(images.shape[0], images.shape[1] * images.shape[2])
 
     # Convert from [0, 255] -> [0.0, 1.0].
     images = images.astype(np.float32)
@@ -283,11 +282,11 @@ def read_data_sets(data_path, fake_data=False, one_hot=False,
     if 'fashion' in data_path or 'mnist' in data_path:  # mnist or fashion
         train_images, train_labels, val_images, val_labels, test_images, test_labels = \
             load_mnist(data_path, validation_size, source_url, one_hot)
-	reshape = True
+        reshape = True
     else:
         train_images, train_labels, val_images, val_labels, test_images, test_labels = \
             load_medical_data(data_path)
-	reshape = False
+        reshape = False
 
     # add random permutation to train & validation
     np.random.seed(42)
