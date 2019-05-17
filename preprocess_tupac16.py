@@ -142,7 +142,7 @@ augment = False
 if augment:
     saving_path = './data/tupac16/'
 else:
-    saving_path = './data/tupac16-noaug'
+    saving_path = './data/tupac16-noaug/'
 chs = 1
 
 df = pd.read_csv(os.path.join(raw_data_path, 'train_slides.csv'), dtype=object).values.tolist()

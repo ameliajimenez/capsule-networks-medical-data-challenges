@@ -8,7 +8,7 @@ from networks import capsnet, lenet, baseline
 # to specify other configurations change the values in unbalance_dict={"percentage": 20, "label1": 0, "label2": 8}.
 # Experiment 3: Data augmentation.
 
-data_provider = read_data_sets("data/mnist")
+data_provider = read_data_sets("./data/mnist")
 
 print("Size of:")
 print("- Training-set:\t\t{}".format(len(data_provider.train.labels)))
