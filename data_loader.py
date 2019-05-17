@@ -147,12 +147,13 @@ def load_medical_data(data_path):
 
 def normalize_images(x_images, mean_value):
     """Subtract mean value and normalize images to 0-1."""
+    x_flat = np.zeros((x_images.shape[0], 784))
     for k in range(0, x_images.shape[0]):
         img = x_images[k, ...] - mean_value
         img = cv2.normalize(img.astype('float'), None, 0.0, 1.0, cv2.NORM_MINMAX).astype(np.float32)
-        x_images[k, ...] = np.reshape(img, [-1])
+        x_flat[k, ...] = np.reshape(img, [-1])
 
-    return x_images
+    return x_flat
 
 
 class DataSet(object):
@@ -282,9 +283,11 @@ def read_data_sets(data_path, fake_data=False, one_hot=False,
     if 'fashion' in data_path or 'mnist' in data_path:  # mnist or fashion
         train_images, train_labels, val_images, val_labels, test_images, test_labels = \
             load_mnist(data_path, validation_size, source_url, one_hot)
+	reshape = True
     else:
         train_images, train_labels, val_images, val_labels, test_images, test_labels = \
             load_medical_data(data_path)
+	reshape = False
 
     # add random permutation to train & validation
     np.random.seed(42)
@@ -354,9 +357,9 @@ def read_data_sets(data_path, fake_data=False, one_hot=False,
         train_images = train_images[resulting_ids, ...]
         train_labels = train_labels[resulting_ids, ...]
 
-    data_sets.train = DataSet(train_images, train_labels, fake_data=True, one_hot=True)
-    data_sets.validation = DataSet(val_images, val_labels, fake_data=True, one_hot=True)
-    data_sets.test = DataSet(test_images, test_labels, fake_data=True, one_hot=True)
+    data_sets.train = DataSet(train_images, train_labels, fake_data=True, one_hot=True, reshape=reshape)
+    data_sets.validation = DataSet(val_images, val_labels, fake_data=True, one_hot=True, reshape=reshape)
+    data_sets.test = DataSet(test_images, test_labels, fake_data=True, one_hot=True, reshape=reshape)
 
     return data_sets
 
