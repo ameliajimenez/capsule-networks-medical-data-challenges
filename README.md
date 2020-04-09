@@ -1,4 +1,6 @@
 ## Capsule Networks against Medical Imaging Data Challenges
+#### by Amelia Jiménez-Sánchez, Shadi Albarqouni, Diana Mateus
+
 This repository provides a TensorFlow implementation of our work -> [[**Paper**]](https://link.springer.com/chapter/10.1007%2F978-3-030-01364-6_17)
 [[**arXiv**]](https://arxiv.org/abs/1807.07559#) [[**slides**]](https://ameliajimenez.netlify.com/files/labels18_slides.pdf)  [[**poster**]](https://ameliajimenez.netlify.com/files/labels18_poster.pdf)
 
